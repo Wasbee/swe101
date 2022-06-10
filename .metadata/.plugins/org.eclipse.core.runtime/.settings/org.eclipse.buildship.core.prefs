@@ -1,6 +1,7 @@
 arguments=
 auto.sync=false
 eclipse.preferences.version=1
+experimental.module.support=false
 gradle.build.scans=false
 gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)
 gradle.offline.mode=false
