@@ -2,6 +2,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * @author janmolina
+ *
+ */
 public class RecipeData 
 {
 	private String[] ingredients;
@@ -10,6 +14,13 @@ public class RecipeData
 	private String[] recipeCuisine;
 	
 
+	/**
+	 * RecipeData constructor (RIGID)
+	 * @param cuisineNames
+	 * @param ingredients
+	 * @param recipeCuisine
+	 * @param recipeIngredients
+	 */
 	public RecipeData(String[] cuisineNames, 
 					String[] ingredients, 
 					String[] recipeCuisine,
@@ -20,6 +31,12 @@ public class RecipeData
 		this.recipeCuisine = recipeCuisine;
 		this.recipeIngredients = recipeIngredients;
 	}
+	
+	/**
+	 * RecipeData constructor
+	 * @param fileTitle
+	 * @throws FileNotFoundException
+	 */
 	public RecipeData(String fileTitle) throws FileNotFoundException
 	{
 		Scanner dataFile = new Scanner(new File(fileTitle));
@@ -54,6 +71,7 @@ public class RecipeData
 		}
 
 	}
+	
 	private void readIngredientNames(Scanner dataFile, int numberOfIngredients)
 	{
 		ingredients = new String[numberOfIngredients]; 
@@ -66,6 +84,7 @@ public class RecipeData
 			ingredients[i] = parts[1];
 		}
 	}
+	
 	private void readCuisineNames(Scanner dataFile)
 	{
 		String line = dataFile.nextLine();
@@ -73,6 +92,7 @@ public class RecipeData
 		line = parts[2];
 		cuisineNames = line.substring(1, line.length() - 1).split("[^a-z_]");
 	}
+	
 	private int getAttribute(Scanner dataFile) {
 		String line;
 		String[] parts;
@@ -80,31 +100,63 @@ public class RecipeData
 		parts = line.split(" ");
 		return Integer.parseInt(parts[3]);
 	}
+	
+	/**
+	 * @return the number of samples
+	 */
 	public int getNumberOfSamples()
 	{
 		return recipeCuisine.length;
 	}
+	
+	/**
+	 * @return the number of cuisines
+	 */
 	public int getNumberOfCuisines()
 	{
 		return cuisineNames.length;
 	}
+	
+	/**
+	 * @return the number of ingredients
+	 */
 	public int getNumberOfIngredients()
 	{
 		return ingredients.length;
 	}
+	
+	/**
+	 * @param ingredientNumber
+	 * @return the ingredient name
+	 */
 	public String getIngredient(int ingredientNumber)
 	{
 		return ingredients[ingredientNumber];
 	}
+	
+	/**
+	 * @param cuisineNumber
+	 * @return the cuisine name
+	 */
 	public String getCuisineName(int cuisineNumber)
 	{
 		return cuisineNames[cuisineNumber];
 	}
 	
+	/**
+	 * @param recipeNum
+	 * @param ingredientNum
+	 * @return true or false if the ingredient is present or not present, respectively
+	 */
 	public boolean getRecipeIngredient(int recipeNum, int ingredientNum)
 	{
 		return recipeIngredients[recipeNum][ingredientNum];
 	}
+	
+	/**
+	 * @param recipeNum
+	 * @return the recipe name
+	 */
 	public String getRecipeCuisine(int recipeNum)
 	{
 		return recipeCuisine[recipeNum];

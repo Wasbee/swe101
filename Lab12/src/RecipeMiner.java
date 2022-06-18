@@ -24,9 +24,30 @@ public class RecipeMiner
 			}
 		}
 		
+		
 		System.out.println("File contains " + r.getNumberOfSamples() +
 			" recipes with " + r.getNumberOfIngredients() + " ingredients " +
 			" across " + r.getNumberOfCuisines() + " cuisines");
+		
+		System.out.println("How many features should be selected? ");
+		String line = keyboard.nextLine();
+		int numberOfFeatures = Integer.parseInt(line);
+		
+		FeatureSelector fs = new FeatureSelector(r);
+		int[] features = fs.topXFeatures(numberOfFeatures);
+		
+		System.out.println("The top " + numberOfFeatures + " features are ");
+		for (int i = 0; i < numberOfFeatures; i++)
+		{
+			System.out.printf("  #%d %s\n",
+					i + 1,
+					r.getIngredient(features[i])
+					);
+		}
+		
+		
+		keyboard.close();
+		
 
 	}
 
